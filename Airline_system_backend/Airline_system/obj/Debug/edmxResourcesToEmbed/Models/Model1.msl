@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Airline_res_systemModelStoreContainer" CdmEntityContainer="Airline_Entities">
+    <EntitySetMapping Name="Booking_details">
+      <EntityTypeMapping TypeName="Airline_res_systemModel.Booking_details">
+        <MappingFragment StoreEntitySet="Booking_details">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Cust_Id" ColumnName="Cust_Id" />
+          <ScalarProperty Name="date_of_booking" ColumnName="date_of_booking" />
+          <ScalarProperty Name="flying_from" ColumnName="flying_from" />
+          <ScalarProperty Name="moving_to" ColumnName="moving_to" />
+          <ScalarProperty Name="Departure_date" ColumnName="Departure_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Flight_Schedule">
+      <EntityTypeMapping TypeName="Airline_res_systemModel.Flight_Schedule">
+        <MappingFragment StoreEntitySet="Flight_Schedule">
+          <ScalarProperty Name="Day" ColumnName="Day" />
+          <ScalarProperty Name="Source" ColumnName="Source" />
+          <ScalarProperty Name="Departure_time" ColumnName="Departure_time" />
+          <ScalarProperty Name="Arrival_time" ColumnName="Arrival_time" />
+          <ScalarProperty Name="Total_seats" ColumnName="Total_seats" />
+          <ScalarProperty Name="Remaining_seats" ColumnName="Remaining_seats" />
+          <ScalarProperty Name="Flight_id" ColumnName="Flight_id" />
+          <ScalarProperty Name="Destination" ColumnName="Destination" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserDatas">
+      <EntityTypeMapping TypeName="Airline_res_systemModel.UserData">
+        <MappingFragment StoreEntitySet="UserData">
+          <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+          <ScalarProperty Name="Country_of_Residence" ColumnName="Country_of_Residence" />
+          <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Phone_Number" ColumnName="Phone_Number" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

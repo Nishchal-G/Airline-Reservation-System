@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Airline_res_systemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Booking_details">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Cust_Id" Type="Int32" Nullable="false" />
+    <Property Name="date_of_booking" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="flying_from" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="moving_to" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Departure_date" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="UserData" Relationship="Self.FK_Booking_details_UserData" FromRole="Booking_details" ToRole="UserData" />
+  </EntityType>
+  <EntityType Name="Flight_Schedule">
+    <Key>
+      <PropertyRef Name="Flight_id" />
+    </Key>
+    <Property Name="Day" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Source" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Departure_time" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="Arrival_time" Type="Time" Nullable="false" Precision="4" />
+    <Property Name="Total_seats" Type="Int32" Nullable="false" />
+    <Property Name="Remaining_seats" Type="Int32" Nullable="false" />
+    <Property Name="Flight_id" Type="Int32" Nullable="false" />
+    <Property Name="Destination" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserData">
+    <Key>
+      <PropertyRef Name="Customer_ID" />
+    </Key>
+    <Property Name="Customer_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Birthday" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Country_of_Residence" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Nationality" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Phone_Number" Type="Int64" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Booking_details" Relationship="Self.FK_Booking_details_UserData" FromRole="UserData" ToRole="Booking_details" />
+  </EntityType>
+  <Association Name="FK_Booking_details_UserData">
+    <End Role="UserData" Type="Self.UserData" Multiplicity="1" />
+    <End Role="Booking_details" Type="Self.Booking_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserData">
+        <PropertyRef Name="Customer_ID" />
+      </Principal>
+      <Dependent Role="Booking_details">
+        <PropertyRef Name="Cust_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Airline_Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Booking_details" EntityType="Self.Booking_details" />
+    <EntitySet Name="Flight_Schedule" EntityType="Self.Flight_Schedule" />
+    <EntitySet Name="UserDatas" EntityType="Self.UserData" />
+    <AssociationSet Name="FK_Booking_details_UserData" Association="Self.FK_Booking_details_UserData">
+      <End Role="UserData" EntitySet="UserDatas" />
+      <End Role="Booking_details" EntitySet="Booking_details" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

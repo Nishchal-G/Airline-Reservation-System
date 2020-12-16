@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Airline_res_systemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Booking_details">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Cust_Id" Type="int" Nullable="false" />
+    <Property Name="date_of_booking" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="flying_from" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="moving_to" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Departure_date" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Flight_Schedule">
+    <Key>
+      <PropertyRef Name="Flight_id" />
+    </Key>
+    <Property Name="Day" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Source" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Departure_time" Type="time" Precision="7" Nullable="false" />
+    <Property Name="Arrival_time" Type="time" Precision="4" Nullable="false" />
+    <Property Name="Total_seats" Type="int" Nullable="false" />
+    <Property Name="Remaining_seats" Type="int" Nullable="false" />
+    <Property Name="Flight_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Destination" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserData">
+    <Key>
+      <PropertyRef Name="Customer_ID" />
+    </Key>
+    <Property Name="Customer_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="3" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Birthday" Type="date" Nullable="false" />
+    <Property Name="Country_of_Residence" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Nationality" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Phone_Number" Type="bigint" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Booking_details_UserData">
+    <End Role="UserData" Type="Self.UserData" Multiplicity="1" />
+    <End Role="Booking_details" Type="Self.Booking_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserData">
+        <PropertyRef Name="Customer_ID" />
+      </Principal>
+      <Dependent Role="Booking_details">
+        <PropertyRef Name="Cust_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Airline_res_systemModelStoreContainer">
+    <EntitySet Name="Booking_details" EntityType="Self.Booking_details" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Flight_Schedule" EntityType="Self.Flight_Schedule" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserData" EntityType="Self.UserData" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Booking_details_UserData" Association="Self.FK_Booking_details_UserData">
+      <End Role="UserData" EntitySet="UserData" />
+      <End Role="Booking_details" EntitySet="Booking_details" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
